@@ -2,6 +2,7 @@ import os
 import re
 import json
 import requests
+import schedule
 from flask import Flask, request, redirect, url_for, session, render_template
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -69,7 +70,7 @@ def mainPage():
 
 		if ((baseCountPages // 9) > 1) and (baseCountPages % 9 == 1):
 			
-			dataBase.set_status_of_couple(curCoupleApi + 1)
+			dataBase.set_unavailable_status_of_couple(curCoupleApi + 1)
 
 			curCoupleApi += 1	
 
@@ -171,11 +172,11 @@ def logout():
 	session.clear()
 	return redirect(url_for('login'))
 
-
+def scheduleRun():
+	schedule.every().day.at("00:00").do(dataBase.set_available_status_of_couple)
 
 admin = Admin(app)
 admin.add_view(MyModelView(Accounts, db.session))
-	
 	
 
 

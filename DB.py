@@ -19,9 +19,13 @@ class dbClass:
             cursor.execute("SELECT api_key, search_engine_id FROM accounts WHERE status_of_couple='available'")
             return cursor.fetchall()
         
-    def set_status_of_couple(self, id_of_couple):
+    def set_unavailable_status_of_couple(self, id_of_couple):
         with self.connection.cursor() as cursor:
             cursor.execute(f"UPDATE accounts SET status_of_couple='unavailable' WHERE id={id_of_couple}")
+
+    def set_available_status_of_couple(self):
+        with self.connection.cursor() as cursor:
+            cursor.execute(f"UPDATE accounts SET status_of_couple='available' WHERE status_of_couple='unavailable'")
         
     def close(self):
         self.connection.close()
