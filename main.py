@@ -10,6 +10,7 @@ from flask_migrate import Migrate
 import psycopg2
 from dotenv import load_dotenv
 from DB import dbClass
+from models import Accounts, MyModelView
 
 
 load_dotenv()
@@ -67,6 +68,9 @@ def mainPage():
 		curCoupleApi = 0
 
 		if ((baseCountPages // 9) > 1) and (baseCountPages % 9 == 1):
+			
+			dataBase.set_status_of_couple(curCoupleApi + 1)
+
 			curCoupleApi += 1	
 
 		numRes = 10
@@ -167,20 +171,6 @@ def logout():
 	session.clear()
 	return redirect(url_for('login'))
 
-class Accounts(db.Model):
-	__tablename__ = "accounts"
-
-	id = db.Column(db.Integer, primary_key=True)
-	api_key = db.Column(db.Text)
-	search_engine_id = db.Column(db.Text)
-
-class MyModelView(ModelView):
-	def is_accessible(self):
-		if 'loggedin' in session:
-			return True
-		else:
-			return False
-
 
 
 admin = Admin(app)
@@ -192,4 +182,4 @@ admin.add_view(MyModelView(Accounts, db.session))
 if __name__ == "__main__":
 	with app.app_context():
 		db.create_all()
-	app.run(host='0.0.0.0', debug=False)
+	app.run(host='0.0.0.0', debug=True)
