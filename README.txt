@@ -1,9 +1,14 @@
-Install virtual enviroment and modules:
+sudo apt-get -y install python3 python3-venv python3-dev
+
+sudo apt-get -y install git
+
+git clone <repository>
+
+cd accountsParser
 
 python -m venv venv
 
-Linux: source venv/bin/activate
-Win: venv\Scripts\activate.bat
+source venv/bin/activate
 
 pip install -r requirements.txt
 
