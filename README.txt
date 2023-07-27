@@ -53,7 +53,7 @@ ExecStart=/home/<User>/accountsParser/venv/bin/uwsgi --ini accountsParser.ini
 [Install]
 WantedBy=multi-user.target
 
-Paste options in file(User and <User>)
+Change options in file(User and <User>)
 
 sudo chgrp www-data /home/<User>
 
