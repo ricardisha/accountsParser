@@ -12,8 +12,6 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-sudo ufw allow 5000
-
 uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
 
 You’re now done with your virtual environment, so you can deactivate it:
@@ -79,8 +77,3 @@ sudo ln -s /etc/nginx/sites-available/accountsParset /etc/nginx/sites-enabled
 sudo unlink /etc/nginx/sites-enabled/default
 
 sudo systemctl restart nginx
-
-No longer need access through port 5000, so you can remove that rule. Then, you can allow access to the Nginx server:
-
-sudo ufw delete allow 5000
-sudo ufw allow 'Nginx Full'
