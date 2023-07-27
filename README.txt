@@ -12,13 +12,12 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-export FLASK_APP=main.py
+iptables -A INPUT -p tcp -m tcp --sport 5000 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --dport 5000 -j ACCEPT
 
-flask db init
+gunicorn --bind 0.0.0.0:5000 wsgi:app --workers=3
 
-(For migrations:
-    flask db migrate
-    flask db upgrade)
+
 
 Set settings in .env file
 
