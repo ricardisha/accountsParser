@@ -2,7 +2,7 @@ sudo apt-get -y install python3 python3-venv python3-dev
 
 sudo apt-get -y install git
 
-git clone <repository>
+git clone https://github.com/ricardisha/accountsParser.git
 
 cd accountsParser
 
