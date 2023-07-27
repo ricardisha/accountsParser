@@ -10,6 +10,8 @@ python -m venv venv
 
 source venv/bin/activate
 
+pip install uwsgi
+
 pip install -r requirements.txt
 
 uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
